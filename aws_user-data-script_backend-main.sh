@@ -1,5 +1,4 @@
 #!/bin/bash
-sudo -s
 
 ###필요한 정보 정의
 #AWS Systems Manager Parameter Store에서 shh,gpg key를 가져옴
