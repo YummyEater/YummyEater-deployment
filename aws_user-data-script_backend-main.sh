@@ -13,22 +13,22 @@ export DOCKER_IMAGE_PATH="ohretry/yummy-backend"
 chmod +x ./amazonlinux2023_init_docker.sh ./amazonlinux2023_init_ssh.sh ./amazonlinux2023_init_gpg.sh ./amazonlinux2023_init_openssl.sh ./amazonlinux2023_init_git-crypt.sh ./amazonlinux2023_init_swapfile.sh ./clone-decrypt_config-repository.sh
 #docker 설치
 echo "================ 도커 설치 ================"
-./amazonlinux2023_init_docker.sh
+source ./amazonlinux2023_init_docker.sh
 #ssh 초기화, ssh-agent 시작
 echo "================ ssh 설정 ================"
-./amazonlinux2023_init_ssh.sh
+source ./amazonlinux2023_init_ssh.sh
 #gpg 설치, gpg-agent 시작
 echo "================ gpg 설정 ================"
-./amazonlinux2023_init_gpg.sh
+source ./amazonlinux2023_init_gpg.sh
 #openssl 설치
 echo "================ openssl 설치 ================"
-./amazonlinux2023_init_openssl.sh
+source ./amazonlinux2023_init_openssl.sh
 #git-crypt 설치
 echo "================ git-crypt 설치 ================"
-./amazonlinux2023_init_git-crypt.sh
+source ./amazonlinux2023_init_git-crypt.sh
 #swapfile 2GB 설정
 echo "================ 스왑메모리 2GM 설정 ================"
-./amazonlinux2023_init_swapfile.sh
+source ./amazonlinux2023_init_swapfile.sh
 
 #config 레포지토리를 clone하고 git-crypt 복호화
 echo "================ Config 레포지토리 클론 & 복호화 ================"
