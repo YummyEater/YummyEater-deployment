@@ -26,6 +26,9 @@ source ./amazonlinux2023_init_openssl.sh
 #git-crypt 설치
 echo "================ git-crypt 설치 ================"
 source ./amazonlinux2023_init_git-crypt.sh
+#swapfile 2GB 설정
+echo "================ 스왑메모리 2GB 설정 ================"
+source ./amazonlinux2023_init_swapfile.sh
 
 #config 레포지토리를 clone하고 git-crypt 복호화
 echo "================ Config 레포지토리 클론 & 복호화 ================"
