@@ -10,16 +10,16 @@ export CONFIG_REPOSITORY_ENVFILE_PATH="config/backend-main.env"
 export DOCKER_IMAGE_PATH="ohretry/yummy-backend"
 
 #실행권한 부여
-chmod +x ./amazonlinux2023_init_docker.sh ./amazonlinux2023_init_ssh-agent.sh ./amazonlinux2023_init_gpg-agent.sh ./amazonlinux2023_init_openssl.sh ./amazonlinux2023_init_git-crypt.sh ./amazonlinux2023_init_swapfile.sh ./clone-decrypt_config-repository.sh
+chmod +x ./amazonlinux2023_init_docker.sh ./amazonlinux2023_init_ssh.sh ./amazonlinux2023_init_gpg.sh ./amazonlinux2023_init_openssl.sh ./amazonlinux2023_init_git-crypt.sh ./amazonlinux2023_init_swapfile.sh ./clone-decrypt_config-repository.sh
 #docker 설치
 echo "================ 도커 설치 ================"
 ./amazonlinux2023_init_docker.sh
 #ssh 초기화, ssh-agent 시작
 echo "================ ssh 설정 ================"
-./amazonlinux2023_init_ssh-agent.sh
+./amazonlinux2023_init_ssh.sh
 #gpg 설치, gpg-agent 시작
 echo "================ gpg 설정 ================"
-./amazonlinux2023_init_gpg-agent.sh
+./amazonlinux2023_init_gpg.sh
 #openssl 설치
 echo "================ openssl 설치 ================"
 ./amazonlinux2023_init_openssl.sh
