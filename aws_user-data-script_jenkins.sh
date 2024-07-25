@@ -15,8 +15,14 @@ source ./amazonlinux2023_init_swapfile.sh
 
 ###jenkins 서버 실행
 echo "================ jenkins 서버 실행 ================"
-# host의 docker socket 와 cli 공유.
+#docker.sock의 그룹인 docker의 gid를 얻어옴
+DOCKER_GID=$(getent group docker | cut -d: -f3)
+#환경변수를 설정
+touch ./.env
+echo "DOCKER_GID=$DOCKER_GID" >> ./.env
+# 환경변수를 넘겨주고, jenkins_home volume과 연결, host의 docker socket과 cli 공유, 포트 연결
 docker run \
+  --env-file ./.env \
   -v jenkins_home:/var/jenkins_home \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v $(which docker):/usr/bin/docker \
