@@ -32,8 +32,11 @@ RUN mv git-crypt-0.7.0-linux-x86_64 /usr/local/bin/git-crypt
 RUN mkdir -p ~/.ssh
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
-###dos2unix 설치
-RUN apt-get update && apt-get install -y dos2unix
+###dos2unix, aws cli 설치. 그리고 패키지 파일과 패키지 목록 캐시를 제거해서 이미지 크기를 줄임
+RUN apt-get update && \
+    apt-get install -y dos2unix awscli && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # 초기화 스크립트 복사
 COPY ./init.sh /init.sh
