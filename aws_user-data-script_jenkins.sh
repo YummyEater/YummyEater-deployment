@@ -11,9 +11,21 @@ echo "현재 인스턴스의 id = $INSTANCE_ID"
 VOLUME_ID=$(aws ec2 describe-volumes --filters "Name=tag:Name,Values=jenkins_home" --query "Volumes[*].VolumeId" --output text)
 echo "jenkins_home ebs volume의 id = $VOLUME_ID"
 
+# 볼륨 ID가 조회되지 않으면 스크립트 종료
+if [ -z "$VOLUME_ID" ]; then
+  echo "jenkins_home EBS 볼륨을 찾을 수 없습니다. 스크립트를 종료합니다."
+  exit 1
+fi
+
 #jenkins_home 볼륨을 자신과 연결, 장치 이름은 /dev/sdb, ec2 리눅스에는 /dev/xvdb로 인식됨
 aws ec2 attach-volume --volume-id $VOLUME_ID --instance-id $INSTANCE_ID --device /dev/sdb
 echo "$INSTANCE_ID에 ebs 볼륨 $VOLUME_ID를 연결. 장치 이름은 /dev/sdb. 리눅스에서는 /dev/xvdb로 인식."
+
+# 볼륨이 연결될 때까지 대기
+while ! lsblk | grep -q xvdb; do
+  echo "볼륨이 아직 연결되지 않았습니다. 5초 후 다시 확인합니다."
+  sleep 5
+done
 
 #jenkins_home 마운트
 mkdir /mnt/jenkins_home
