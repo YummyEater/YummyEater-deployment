@@ -1,8 +1,10 @@
 #!/bin/bash
 
 ###볼륨 연결
+# IMDSv2로 바뀌면서 토큰이 있어야 접근 가능하다고 함. 3분짜리 토큰을 발급
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 270")
 # 자기 자신의 인스턴스 ID 조회
-INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)
 echo "현재 인스턴스의 id = $INSTANCE_ID"
 
 # jenkins_home 볼륨 ID 조회
